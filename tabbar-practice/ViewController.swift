@@ -101,14 +101,14 @@ class CustomTabBarController: UITabBarController {
     }
   }
 
-  private func currentViewLayoutSubviews() {
-    viewControllers?[selectedIndex].view.setNeedsLayout()
-    viewControllers?[selectedIndex].view.layoutSubviews()
-  }
+//  private func currentViewLayoutSubviews() {
+//    viewControllers?[selectedIndex].view.setNeedsLayout()
+//    viewControllers?[selectedIndex].view.layoutSubviews()
+//  }
 }
 
 
-class ViewController: UIViewController {
+class ViewController1: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -118,7 +118,9 @@ class ViewController: UIViewController {
   override func viewSafeAreaInsetsDidChange() {
     super.viewSafeAreaInsetsDidChange()
 
-    print("### safe area:", additionalSafeAreaInsets, view.safeAreaInsets)
+    print("### safe area1:", view.safeAreaInsets)
+
+    // TODO: SafeAreaを画面に表示
   }
 
   @IBAction func didTapShowButton(_ sender: Any) {
@@ -129,4 +131,40 @@ class ViewController: UIViewController {
     NotificationCenter.default.post(name: CustomTabBarController.hideCustomTabBar, object: nil)
   }
 
+}
+
+class ViewController2: UIViewController {
+
+  let scrollView = UIScrollView()
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+
+    view.addSubview(scrollView)
+
+    scrollView.backgroundColor = .lightGray
+
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+
+    NSLayoutConstraint.activate([
+      scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+      scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
+      scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+      scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+    ])
+
+    let box = UIView(frame: .init(x: 100, y: 100, width: 200, height: 800))
+
+    box.backgroundColor = .darkGray
+    scrollView.addSubview(box)
+
+    scrollView.contentSize = .init(width: view.bounds.width, height: box.frame.maxY)
+  }
+
+  override func viewSafeAreaInsetsDidChange() {
+    super.viewSafeAreaInsetsDidChange()
+
+    print("### safe area2:", additionalSafeAreaInsets, view.safeAreaInsets)
+  }
 }

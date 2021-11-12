@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--View Controller2-->
         <scene sceneID="u0s-E4-KcY">
             <objects>
-                <viewController id="wma-HM-8PU" sceneMemberID="viewController">
+                <viewController id="wma-HM-8PU" customClass="ViewController2" customModule="tabbar_practice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IeN-mG-rTc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,12 +22,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pwb-aq-A5A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-439" y="64"/>
+            <point key="canvasLocation" x="-439.13043478260875" y="63.616071428571423"/>
         </scene>
-        <!--View Controller-->
+        <!--View Controller1-->
         <scene sceneID="64s-bc-gbh">
             <objects>
-                <viewController id="Jpe-0c-1LJ" customClass="ViewController" customModule="tabbar_practice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Jpe-0c-1LJ" customClass="ViewController1" customModule="tabbar_practice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2um-eu-fly">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
