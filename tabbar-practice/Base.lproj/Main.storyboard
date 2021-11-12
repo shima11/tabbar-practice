@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="u0s-E4-KcY">
             <objects>
-                <viewController id="wma-HM-8PU" customClass="ViewController" customModule="tabbar_practice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wma-HM-8PU" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IeN-mG-rTc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,23 +22,50 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pwb-aq-A5A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1084" y="49"/>
+            <point key="canvasLocation" x="-439" y="64"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="64s-bc-gbh">
             <objects>
-                <viewController id="Jpe-0c-1LJ" sceneMemberID="viewController">
+                <viewController id="Jpe-0c-1LJ" customClass="ViewController" customModule="tabbar_practice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2um-eu-fly">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="iVk-UU-U3G">
+                                <rect key="frame" x="139.5" y="411" width="135" height="74"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LF3-i4-EwP">
+                                        <rect key="frame" x="0.0" y="0.0" width="135" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="Show CustomBar"/>
+                                        <connections>
+                                            <action selector="didTapShowButton:" destination="Jpe-0c-1LJ" eventType="touchUpInside" id="SUV-Jb-TDE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IeR-xh-IMQ">
+                                        <rect key="frame" x="0.0" y="43" width="135" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="Hide CustomBar"/>
+                                        <connections>
+                                            <action selector="didTapHideButton:" destination="Jpe-0c-1LJ" eventType="touchUpInside" id="hZW-6O-3vz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="zaf-bQ-LYe"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <constraints>
+                            <constraint firstItem="iVk-UU-U3G" firstAttribute="centerX" secondItem="2um-eu-fly" secondAttribute="centerX" id="crY-zE-mcW"/>
+                            <constraint firstItem="iVk-UU-U3G" firstAttribute="centerY" secondItem="2um-eu-fly" secondAttribute="centerY" id="ooq-G7-6yr"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="LTR-4j-iRe"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JY-PB-pB9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-429" y="49"/>
+            <point key="canvasLocation" x="-1126.0869565217392" y="63.616071428571423"/>
         </scene>
         <!--Custom Tab Bar Controller-->
         <scene sceneID="fvf-qt-vyU">
