@@ -37,24 +37,30 @@ class CustomTabBarController: UITabBarController {
 
   public func showBar() {
 
+    guard customBar.isDescendant(of: tabBar) == false else { return }
+
     object_setClass(tabBar, CustomTabBar.self)
 
     // TODO: Animation
 
     tabBar.addSubview(customBar)
 
-    customBar.translatesAutoresizingMaskIntoConstraints = false
+    customBar.frame = .init(x: 0, y: -Self.customBarHeight, width: tabBar.bounds.width, height: Self.customBarHeight)
 
-    customBar.removeConstraints(customBar.constraints)
+    // TODO: AutolayoutだとremoveFromSuperviewするときにfatalerrorになる
+//    customBar.translatesAutoresizingMaskIntoConstraints = false
+//
+//    customBar.removeConstraints(customBar.constraints)
+//
+//    NSLayoutConstraint.activate([
+//      customBar.heightAnchor.constraint(equalToConstant: Self.customBarHeight),
+//      customBar.leftAnchor.constraint(equalTo: tabBar.leftAnchor),
+//      customBar.rightAnchor.constraint(equalTo: tabBar.rightAnchor),
+//      customBar.topAnchor.constraint(equalTo: tabBar.topAnchor),
+//    ])
 
-    NSLayoutConstraint.activate([
-      customBar.heightAnchor.constraint(equalToConstant: Self.customBarHeight),
-      customBar.leftAnchor.constraint(equalTo: tabBar.leftAnchor),
-      customBar.rightAnchor.constraint(equalTo: tabBar.rightAnchor),
-      customBar.topAnchor.constraint(equalTo: tabBar.topAnchor),
-    ])
-
-//    additionalSafeAreaInsets = .init(top: 0, left: 0, bottom: Self.customBarHeight, right: 0)
+    // TODO: bottomに入れるとTabBarItemに対してもSafeAreaが効いてしまう
+    additionalSafeAreaInsets = .init(top: 0, left: 0, bottom: 0.1, right: 0)
 
     for item in (tabBar.items)! {
       item.imageInsets = UIEdgeInsets(
@@ -70,14 +76,15 @@ class CustomTabBarController: UITabBarController {
 
   public func hideBar() {
 
-    // TODO: Animation
-    customBar.removeConstraints(customBar.constraints)
+    guard customBar.isDescendant(of: tabBar) == true else { return }
 
-//    customBar.removeFromSuperview()
+    // TODO: Animation
+
+    customBar.removeFromSuperview()
 
     object_setClass(tabBar, UITabBar.self)
 
-//    additionalSafeAreaInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
+    additionalSafeAreaInsets = .init(top: 0, left: 0, bottom: 0, right: 0)
 
     for item in (tabBar.items)! {
       item.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -88,7 +95,6 @@ class CustomTabBarController: UITabBarController {
 
   class CustomTabBar: UITabBar {
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-//      super.sizeThatFits(size)
       var sizeThatFits = super.sizeThatFits(size)
       sizeThatFits.height = sizeThatFits.height + CustomTabBarController.customBarHeight
       return sizeThatFits
@@ -107,6 +113,12 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
+  }
+
+  override func viewSafeAreaInsetsDidChange() {
+    super.viewSafeAreaInsetsDidChange()
+
+    print("### safe area:", additionalSafeAreaInsets, view.safeAreaInsets)
   }
 
   @IBAction func didTapShowButton(_ sender: Any) {
