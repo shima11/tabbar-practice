@@ -14,7 +14,7 @@ class CustomTabBarController: UITabBarController {
 
   static let customBarHeight: CGFloat = 44
 
-  private var isBarViewShowing = false
+//  private var isBarViewShowing = false
 
   // TODO: CustomClassにして中身を簡単にカスタマイズ
   private let customBar: UIView = .init()
@@ -33,6 +33,8 @@ class CustomTabBarController: UITabBarController {
     NotificationCenter.default.addObserver(forName: Self.hideCustomTabBar, object: nil, queue: .main) { [weak self] notification in
       self?.hideBar()
     }
+
+//    object_setClass(tabBar, CustomTabBar.self)
 
   }
 
@@ -80,7 +82,7 @@ class CustomTabBarController: UITabBarController {
       )
     }
 
-    isBarViewShowing = true
+    (tabBar as? CustomTabBar)?.isBarViewShowing = true
   }
 
   public func hideBar() {
@@ -107,14 +109,40 @@ class CustomTabBarController: UITabBarController {
       item.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
-    isBarViewShowing = false
+    (tabBar as? CustomTabBar)?.isBarViewShowing = false
+
   }
 
   class CustomTabBar: UITabBar {
+
+    var isBarViewShowing = false
+
+//    let backgroundView: UIView = .init()
+//
+//    private func setup() {
+//      backgroundView.backgroundColor = .red
+//      addSubview(backgroundView)
+//      backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//    }
+//
+//    open override func willMove(toSuperview newSuperview: UIView?) {
+//      super.willMove(toSuperview: newSuperview)
+//      setup()
+//    }
+
+    override func layoutSubviews() {
+      super.layoutSubviews()
+      print(subviews)
+    }
+
     override func sizeThatFits(_ size: CGSize) -> CGSize {
       var sizeThatFits = super.sizeThatFits(size)
-      sizeThatFits.height = sizeThatFits.height + CustomTabBarController.customBarHeight
-      return sizeThatFits
+      if isBarViewShowing {
+        sizeThatFits.height = sizeThatFits.height + CustomTabBarController.customBarHeight
+        return sizeThatFits
+      } else {
+        return sizeThatFits
+      }
     }
   }
 
@@ -131,8 +159,10 @@ class ViewController1: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
+
     safeAreaLabel.numberOfLines = 0
+
+    view.backgroundColor = .systemGray4
   }
 
   override func viewSafeAreaInsetsDidChange() {
