@@ -16,6 +16,7 @@ class CustomTabBarController: UITabBarController {
 
   private var isBarViewShowing = false
 
+  // TODO: CustomClassにして中身を簡単にカスタマイズ
   private let customBar: UIView = .init()
 
   override func viewDidLoad() {
@@ -41,11 +42,19 @@ class CustomTabBarController: UITabBarController {
 
     object_setClass(tabBar, CustomTabBar.self)
 
-    // TODO: Animation
-
     tabBar.addSubview(customBar)
+    // TODO: これだと_UIBarBackgroundよりも後ろには行かずUIBarに被る
+    tabBar.sendSubviewToBack(customBar)
 
     customBar.frame = .init(x: 0, y: -Self.customBarHeight, width: tabBar.bounds.width, height: Self.customBarHeight)
+
+    self.customBar.transform = .init(translationX: 0, y: Self.customBarHeight)
+    self.customBar.alpha = 0
+    UIViewPropertyAnimator(duration: 0.3, dampingRatio: 1) {
+      self.customBar.alpha = 1
+      self.customBar.transform = .identity
+    }
+    .startAnimation()
 
     // TODO: AutolayoutだとremoveFromSuperviewするときにfatalerrorになる
 //    customBar.translatesAutoresizingMaskIntoConstraints = false
@@ -78,9 +87,17 @@ class CustomTabBarController: UITabBarController {
 
     guard customBar.isDescendant(of: tabBar) == true else { return }
 
-    // TODO: Animation
+    let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 1) {
+      self.customBar.alpha = 0
+      self.customBar.transform = .init(translationX: 0, y: Self.customBarHeight)
+    }
+    animator.addCompletion { _ in
+      self.customBar.alpha = 1
+      self.customBar.transform = .identity
+      self.customBar.removeFromSuperview()
+    }
+    animator.startAnimation()
 
-    customBar.removeFromSuperview()
 
     object_setClass(tabBar, UITabBar.self)
 
