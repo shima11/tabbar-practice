@@ -33,10 +33,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="iVk-UU-U3G">
-                                <rect key="frame" x="139.5" y="411" width="135" height="74"/>
+                                <rect key="frame" x="24" y="395" width="366" height="106.5"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SafeArea" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1H-NR-K9L">
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LF3-i4-EwP">
-                                        <rect key="frame" x="0.0" y="0.0" width="135" height="31"/>
+                                        <rect key="frame" x="0.0" y="32.5" width="366" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Show CustomBar"/>
                                         <connections>
@@ -44,7 +50,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IeR-xh-IMQ">
-                                        <rect key="frame" x="0.0" y="43" width="135" height="31"/>
+                                        <rect key="frame" x="0.0" y="75.5" width="366" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Hide CustomBar"/>
                                         <connections>
@@ -57,11 +63,16 @@
                         <viewLayoutGuide key="safeArea" id="zaf-bQ-LYe"/>
                         <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <constraints>
+                            <constraint firstItem="iVk-UU-U3G" firstAttribute="leading" secondItem="zaf-bQ-LYe" secondAttribute="leading" constant="24" id="VCp-MK-dFX"/>
+                            <constraint firstItem="zaf-bQ-LYe" firstAttribute="trailing" secondItem="iVk-UU-U3G" secondAttribute="trailing" constant="24" id="aer-V3-AdB"/>
                             <constraint firstItem="iVk-UU-U3G" firstAttribute="centerX" secondItem="2um-eu-fly" secondAttribute="centerX" id="crY-zE-mcW"/>
                             <constraint firstItem="iVk-UU-U3G" firstAttribute="centerY" secondItem="2um-eu-fly" secondAttribute="centerY" id="ooq-G7-6yr"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="LTR-4j-iRe"/>
+                    <connections>
+                        <outlet property="safeAreaLabel" destination="a1H-NR-K9L" id="jBA-Tb-JCf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JY-PB-pB9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

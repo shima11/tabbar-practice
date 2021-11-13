@@ -21,7 +21,7 @@ class CustomTabBarController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    customBar.backgroundColor = .lightGray
+    customBar.backgroundColor = .systemGray
 
     tabBar.backgroundColor = .white
 
@@ -110,9 +110,12 @@ class CustomTabBarController: UITabBarController {
 
 class ViewController1: UIViewController {
 
+  @IBOutlet weak var safeAreaLabel: UILabel!
+
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view.
+    safeAreaLabel.numberOfLines = 0
   }
 
   override func viewSafeAreaInsetsDidChange() {
@@ -120,7 +123,7 @@ class ViewController1: UIViewController {
 
     print("### safe area1:", view.safeAreaInsets)
 
-    // TODO: SafeAreaを画面に表示
+    safeAreaLabel.text = "safeAreaInsets:\n \(view.safeAreaInsets)"
   }
 
   @IBAction func didTapShowButton(_ sender: Any) {
@@ -140,10 +143,9 @@ class ViewController2: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-
     view.addSubview(scrollView)
 
-    scrollView.backgroundColor = .lightGray
+    scrollView.backgroundColor = .systemGray4
 
     scrollView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -154,9 +156,9 @@ class ViewController2: UIViewController {
       scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
     ])
 
-    let box = UIView(frame: .init(x: 100, y: 100, width: 200, height: 800))
+    let box = UIView(frame: .init(x: 100, y: 50, width: 200, height: 800))
 
-    box.backgroundColor = .darkGray
+    box.backgroundColor = .systemGray6
     scrollView.addSubview(box)
 
     scrollView.contentSize = .init(width: view.bounds.width, height: box.frame.maxY)
