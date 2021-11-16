@@ -160,7 +160,7 @@ class CustomTabBarController2: UITabBarController {
 
   static let customBarHeight: CGFloat = 44
 
-//  private var isBarViewShowing = false
+  private var isBarViewShowing = false
 
   // TODO: CustomClassにして中身を簡単にカスタマイズ
   private let customBar: UIView = .init()
@@ -179,6 +179,14 @@ class CustomTabBarController2: UITabBarController {
     NotificationCenter.default.addObserver(forName: TabBarNotification.hideCustomTabBar, object: nil, queue: .main) { [weak self] notification in
       self?.hideBar()
     }
+
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCustomBar))
+    customBar.addGestureRecognizer(tapGesture)
+  }
+
+  @objc func didTapCustomBar() {
+    print("tap custom bar")
+    // TODO: 全画面モードへの遷移
   }
 
   public func showBar() {
@@ -188,7 +196,7 @@ class CustomTabBarController2: UITabBarController {
     view.insertSubview(customBar, belowSubview: tabBar)
 
     self.customBar.transform = .init(translationX: 0, y: Self.customBarHeight)
-    UIViewPropertyAnimator(duration: 0.3, dampingRatio: 1) {
+    UIViewPropertyAnimator(duration: 0.2, dampingRatio: 1) {
       self.customBar.transform = .identity
     }
     .startAnimation()
@@ -211,13 +219,15 @@ class CustomTabBarController2: UITabBarController {
     viewControllers?.forEach {
       $0.additionalSafeAreaInsets = .init(top: 0, left: 0, bottom: Self.customBarHeight, right: 0)
     }
+
+    isBarViewShowing = true
   }
 
   public func hideBar() {
 
     guard customBar.isDescendant(of: view) == true else { return }
 
-    let animator = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 1) {
+    let animator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 1) {
       self.customBar.transform = .init(translationX: 0, y: Self.customBarHeight)
     }
     animator.addCompletion { _ in
@@ -232,6 +242,8 @@ class CustomTabBarController2: UITabBarController {
     viewControllers?.forEach {
       $0.additionalSafeAreaInsets = .zero
     }
+
+    isBarViewShowing = false
   }
 
 }
