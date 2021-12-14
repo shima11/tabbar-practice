@@ -187,7 +187,12 @@ class CustomTabBarController2: UITabBarController {
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
+    print("view did layout subviews", tabBar.frame)
+  }
 
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    print("view will layout subviews", tabBar.frame)
   }
 
   @objc func didTapCustomBar() {
@@ -202,31 +207,46 @@ class CustomTabBarController2: UITabBarController {
     }
   }
 
+  private var additionalOffsetY: CGFloat = .zero
+
   private func showTabBar() {
+
+    guard isTabBarShowing == false else { return }
+
     isTabBarShowing = true
 
-    let frame: CGRect = .init(origin: .zero, size: self.tabBar.bounds.size)
+    let frame: CGRect = .init(origin: .init(x: 0, y: tabBar.frame.minY - additionalOffsetY), size: self.tabBar.bounds.size)
 
-    UIViewPropertyAnimator(duration: 0.2, dampingRatio: 1) {
-//      self.tabBar.transform = .identity
+    additionalOffsetY = .zero
+    
+    let animator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 1) {
       self.tabBar.frame = frame
-//      self.tabBar.isHidden = false
     }
-    .startAnimation()
-
+//    animator.addCompletion { _ in
+//      self.tabBar.isHidden = false
+//    }
+    animator.startAnimation()
   }
 
   private func hideTabBar() {
+
+    guard isTabBarShowing else { return }
+
     isTabBarShowing = false
 
-    let frame: CGRect = .init(origin: .init(x: 0, y: self.tabBar.bounds.height), size: self.tabBar.bounds.size)
+    print("hide tab bar", tabBar.bounds.height)
 
-    UIViewPropertyAnimator(duration: 0.2, dampingRatio: 1) {
-//      self.tabBar.transform = .init(translationX: 0, y: self.tabBar.bounds.height)
+    additionalOffsetY = tabBar.bounds.height
+
+    let frame: CGRect = .init(origin: .init(x: 0, y: tabBar.frame.minY + additionalOffsetY), size: tabBar.bounds.size)
+
+    let animator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 1) {
       self.tabBar.frame = frame
-//      self.tabBar.isHidden = true
     }
-    .startAnimation()
+//    animator.addCompletion { _ in
+//      self.tabBar.isHidden = true
+//    }
+    animator.startAnimation()
 
   }
 
